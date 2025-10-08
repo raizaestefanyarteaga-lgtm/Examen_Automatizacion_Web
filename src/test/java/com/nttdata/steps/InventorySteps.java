@@ -22,7 +22,17 @@ public class InventorySteps {
      * @return el valor del título de la pantalla de productos
      */
     public String getTitle(){
+
+        /*
+        if(this.driver.findElement(LoginPage.mensajeError).getText().equals("Error de autenticación.")){
+            return "ERROR";
+        }else{
+            return "OK";
+        }
+
+         */
         return this.driver.findElement(InventoryPage.productsTitle).getText();
+
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.nttdata.stepsdefinitions;
 
+import com.nttdata.page.LoginPage;
 import com.nttdata.steps.InventorySteps;
 import com.nttdata.steps.LoginSteps;
 import io.cucumber.java.es.Cuando;
@@ -7,7 +8,13 @@ import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 import io.cucumber.java.es.Y;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static com.nttdata.core.DriverManager.getDriver;
 import static com.nttdata.core.DriverManager.screenShot;
@@ -37,12 +44,34 @@ public class LoginStepsDef {
         loginSteps.login();
         screenShot();
     }
+
+
     @Entonces("valido que debería aparecer el título de {string}")
     public void valido_que_debería_aparecer_el_título_de(String expectedTitle) {
         String title =  inventorySteps(driver).getTitle();
-        //prueba: validamos el título del producto
         Assertions.assertEquals(expectedTitle, title);
     }
+
+
+/*
+    @Entonces("valido que debería aparecer el título de {string}")
+    public void valido_que_debería_aparecer_el_título_de(String expectedTitle) {
+        try {
+            // Espera hasta 5 segundos si aparece el mensaje de error
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+            WebElement errorMsg = wait.until(ExpectedConditions.presenceOfElementLocated(
+                    LoginPage.mensajeError
+            ));
+            String mensaje = errorMsg.getText();
+            Assertions.assertEquals("Error de autenticación.", "OK");
+
+        } catch (TimeoutException e) {
+            Assertions.assertEquals("OK", "OK");
+        }
+    }
+    */
+
+
     @Y("también valido que al menos exista un item")
     public void también_valido_que_al_menos_exista_un_item() {
         int itemsListSize = inventorySteps(driver).getItemSize();
