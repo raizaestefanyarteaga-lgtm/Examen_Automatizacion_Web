@@ -22,14 +22,14 @@ public class LoginStepsDef {
         return new InventorySteps(driver);
     }
 
-    @Dado("que me encuentro en la página de login de Saucedemo")
+    @Dado("estoy en la página de la tienda")
     public void que_me_encuentro_en_la_página_de_login_de_sacedemo() {
         driver = getDriver();
         //driver.get("https://www.saucedemo.com/");
         driver.get("https://qalab.bensg.com/store/es/iniciar-sesion?back=https%3A%2F%2Fqalab.bensg.com%2Fstore%2Fes%2F");
         screenShot();
     }
-    @Cuando("inicio sesión con las credenciales usuario: {string} y contraseña: {string}")
+    @Cuando("me logueo con mi usuario {string} y clave {string}")
     public void inicio_sesión_con_las_credenciales_usuario_y_contraseña(String user, String password) {
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.typeUser(user);
@@ -57,7 +57,7 @@ public class LoginStepsDef {
             throw new RuntimeException(e);
         }
     }
-    @Y("también navego a categoria y subcategoria")
+    @Y("navego a la categoria Clothes y subcategoria Men")
     public void también_navego_categoria_subcategoria() {
         inventorySteps(driver).ClickCategorias();
         Assertions.assertEquals("1", "1");
@@ -65,19 +65,19 @@ public class LoginStepsDef {
 
     }
 
-    @Y("también agregar carrito")
+    @Y("agrego 2 unidades del primer producto al carrito")
     public void también_agregar_carrito() {
         inventorySteps(driver).ClickPrimerProducto();
         try {
             //Thread.sleep(10000);
-            Thread.sleep(10000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         inventorySteps(driver).CantidadProducto("2");
         try {
             //Thread.sleep(10000);
-            Thread.sleep(10000);
+            Thread.sleep(7000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

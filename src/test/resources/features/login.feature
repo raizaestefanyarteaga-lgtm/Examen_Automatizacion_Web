@@ -7,13 +7,15 @@ Característica: Login
 
   @test
   Esquema del escenario: Iniciar sesión
-    Dado que me encuentro en la página de login de Saucedemo
-    Cuando inicio sesión con las credenciales usuario: "<Usuario>" y contraseña: "<Password>"
+    Dado estoy en la página de la tienda
+    Cuando me logueo con mi usuario "<Usuario>" y clave "<Password>"
     Entonces valido que debería aparecer el título de "<Titulo>"
     #Y también valido que al menos exista un item
-    Y también navego a categoria y subcategoria
-    Y también agregar carrito
+    Y navego a la categoria Clothes y subcategoria Men
+    Y agrego 2 unidades del primer producto al carrito
+
 
     Ejemplos:
     |Usuario|Password|Titulo|
     |raizaestefanyarteaga@gmail.com|ermenegyldA|CLOTHES|
+    |raizaestefanyarteaga@gmail.com|XXX|CLOTHES|
